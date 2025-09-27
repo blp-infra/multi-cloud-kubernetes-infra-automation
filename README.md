@@ -85,37 +85,48 @@ Jenkins   SonarQube    Trivy Jenkins SonarQube   Trivy   Jenkins SonarQube   Tri
 
 ```
 multi-cloud-kubernetes-infra-automation/
-terraform-multicloud/
 ├── README.md
 ├── .gitignore
 ├── .terraform-version
 ├── Makefile
+│
+├── global/
+│   ├── variables/
+│   │   ├── dev/
+│   │   │   ├── main.tfvars
+│   │   │   └── state.tfvars
+│   │   ├── staging/
+│   │   │   ├── main.tfvars
+│   │   │   └── state.tfvars
+│   │   └── prod/
+│   │       ├── main.tfvars
+│   │       └── state.tfvars
+│   └── common/
+│       ├── common.tfvars
+│       └── shared-variables.tf
 │
 ├── environments/
 │   ├── dev/
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
-│   │   ├── terraform.tfvars
 │   │   ├── backend.tf
 │   │   └── providers.tf
 │   ├── staging/
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
-│   │   ├── terraform.tfvars
 │   │   ├── backend.tf
 │   │   └── providers.tf
 │   └── prod/
 │       ├── main.tf
 │       ├── variables.tf
 │       ├── outputs.tf
-│       ├── terraform.tfvars
 │       ├── backend.tf
 │       └── providers.tf
 │
 ├── modules/
-│   ├── aws_infra/
+│   ├── aws/
 │   │   ├── compute/
 │   │   │   ├── ec2/
 │   │   │   │   ├── main.tf
@@ -224,7 +235,7 @@ terraform-multicloud/
 │   │           ├── outputs.tf
 │   │           └── versions.tf
 │   │
-│   ├── azure_infra/
+│   ├── azure/
 │   │   ├── compute/
 │   │   │   ├── vm/
 │   │   │   │   ├── main.tf
@@ -343,7 +354,7 @@ terraform-multicloud/
 │   │           ├── outputs.tf
 │   │           └── versions.tf
 │   │
-│   ├── gcp_infra/
+│   ├── gcp/
 │   │   ├── compute/
 │   │   │   ├── vm/
 │   │   │   │   ├── main.tf
@@ -470,6 +481,7 @@ terraform-multicloud/
 │           └── versions.tf
 │
 ├── scripts/
+│   ├── deploy.sh
 │   ├── init.sh
 │   ├── plan.sh
 │   ├── apply.sh
@@ -479,24 +491,76 @@ terraform-multicloud/
 ├── policies/
 │   ├── aws/
 │   │   ├── security-policies/
+│   │   │   ├── s3-bucket-policies.json
+│   │   │   ├── ec2-security-policies.json
+│   │   │   └── iam-baseline-policies.json
 │   │   └── compliance-policies/
+│   │       ├── soc2-compliance.json
+│   │       ├── pci-compliance.json
+│   │       └── hipaa-compliance.json
 │   ├── azure/
 │   │   ├── security-policies/
+│   │   │   ├── storage-account-policies.json
+│   │   │   ├── vm-security-policies.json
+│   │   │   └── rbac-baseline-policies.json
 │   │   └── compliance-policies/
+│   │       ├── soc2-compliance.json
+│   │       ├── pci-compliance.json
+│   │       └── gdpr-compliance.json
 │   └── gcp/
 │       ├── security-policies/
+│       │   ├── gcs-bucket-policies.yaml
+│       │   ├── compute-security-policies.yaml
+│       │   └── iam-baseline-policies.yaml
 │       └── compliance-policies/
+│           ├── soc2-compliance.yaml
+│           ├── pci-compliance.yaml
+│           └── gdpr-compliance.yaml
 │
 ├── docs/
 │   ├── architecture/
+│   │   ├── high-level-design.md
+│   │   ├── network-topology.md
+│   │   ├── security-architecture.md
+│   │   └── data-flow-diagrams.md
 │   ├── runbooks/
+│   │   ├── deployment-procedure.md
+│   │   ├── incident-response.md
+│   │   ├── backup-restore.md
+│   │   └── scaling-procedures.md
 │   ├── troubleshooting/
+│   │   ├── terraform-issues.md
+│   │   ├── provider-errors.md
+│   │   ├── networking-problems.md
+│   │   └── state-management.md
 │   └── best-practices/
+│       ├── coding-standards.md
+│       ├── security-guidelines.md
+│       ├── naming-conventions.md
+│       └── deployment-guidelines.md
 │
 └── tests/
     ├── unit/
+    │   ├── aws/
+    │   │   ├── vpc_test.go
+    │   │   ├── ec2_test.go
+    │   │   └── s3_test.go
+    │   ├── azure/
+    │   │   ├── vnet_test.go
+    │   │   ├── vm_test.go
+    │   │   └── storage_test.go
+    │   └── gcp/
+    │       ├── vpc_test.go
+    │       ├── compute_test.go
+    │       └── gcs_test.go
     ├── integration/
-    └── e2e/                    # Documentation & guides
+    │   ├── aws-integration_test.go
+    │   ├── azure-integration_test.go
+    │   └── gcp-integration_test.go
+    └── e2e/
+        ├── full-stack_test.go
+        ├── multi-cloud_test.go
+        └── disaster-recovery_test.go
 ```
 
 ---
