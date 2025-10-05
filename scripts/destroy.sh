@@ -19,4 +19,4 @@ ENVIRONMENT=${1:-dev}
 #SCRIPT_DIR="$(cd  /terraform/environments/dev)"
 cd  ../terraform/environments/dev/
 
-terraform apply -var-file=../../global/variables/dev/main.tfvars -auto-approve
+terraform destroy -var-file=../../global/variables/dev/main.tfvars -auto-approve

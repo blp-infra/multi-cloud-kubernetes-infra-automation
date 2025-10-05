@@ -16,5 +16,6 @@ NC='\033[0m' # No Color
 ENVIRONMENT=${1:-dev}
 
 # Get the script directory and project root
-SCRIPT_DIR="$(cd )"
-terraform init $()-backend-config=../global/variables/dev/state.tfvars ; 
+#SCRIPT_DIR="$(cd  /terraform/environments/dev)"
+cd  ../terraform/environments/dev/
+terraform init $() -backend-config=../../global/variables/dev/state.tfvars ; 
