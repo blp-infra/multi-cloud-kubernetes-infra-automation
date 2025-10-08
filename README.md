@@ -89,397 +89,398 @@ multi-cloud-kubernetes-infra-automation/
 ├── .gitignore
 ├── .terraform-version
 ├── Makefile
-│
-├── global/
-│   ├── variables/
-│   │   ├── dev/
-│   │   │   ├── main.tfvars
-│   │   │   └── state.tfvars
-│   │   ├── staging/
-│   │   │   ├── main.tfvars
-│   │   │   └── state.tfvars
-│   │   └── prod/
-│   │       ├── main.tfvars
-│   │       └── state.tfvars
-│   └── common/
-│       ├── common.tfvars
-│       └── shared-variables.tf
-│
-├── environments/
-│   ├── dev/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   ├── backend.tf
-│   │   └── providers.tf
-│   ├── staging/
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   ├── outputs.tf
-│   │   ├── backend.tf
-│   │   └── providers.tf
-│   └── prod/
-│       ├── main.tf
-│       ├── variables.tf
-│       ├── outputs.tf
-│       ├── backend.tf
-│       └── providers.tf
-│
-├── modules/
-│   ├── aws/
-│   │   ├── compute/
-│   │   │   ├── ec2/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── ecs/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── eks/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── lambda/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── networking/
-│   │   │   ├── vpc/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── security-groups/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── load-balancer/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── cloudfront/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── storage/
-│   │   │   ├── s3/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── efs/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── database/
-│   │   │   ├── rds/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── dynamodb/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── elasticache/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── monitoring/
-│   │   │   ├── cloudwatch/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── sns/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── security/
-│   │   │   ├── iam/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── secrets-manager/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── kms/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   └── management/
-│   │       ├── cloudtrail/
-│   │       │   ├── main.tf
-│   │       │   ├── variables.tf
-│   │       │   ├── outputs.tf
-│   │       │   └── versions.tf
-│   │       └── config/
-│   │           ├── main.tf
-│   │           ├── variables.tf
-│   │           ├── outputs.tf
-│   │           └── versions.tf
-│   │
-│   ├── azure/
-│   │   ├── compute/
-│   │   │   ├── vm/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── vmss/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── aks/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── container-instances/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── functions/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── networking/
-│   │   │   ├── vnet/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── nsg/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── load-balancer/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── application-gateway/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── cdn/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── storage/
-│   │   │   ├── storage-account/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── disk/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── database/
-│   │   │   ├── sql/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── cosmos-db/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── redis/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── monitoring/
-│   │   │   ├── monitor/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── log-analytics/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── security/
-│   │   │   ├── key-vault/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── identity/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── security-center/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   └── management/
-│   │       ├── resource-group/
-│   │       │   ├── main.tf
-│   │       │   ├── variables.tf
-│   │       │   ├── outputs.tf
-│   │       │   └── versions.tf
-│   │       └── policy/
-│   │           ├── main.tf
-│   │           ├── variables.tf
-│   │           ├── outputs.tf
-│   │           └── versions.tf
-│   │
-│   ├── gcp/
-│   │   ├── compute/
-│   │   │   ├── vm/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── gke/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── cloud-run/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── cloud-functions/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── networking/
-│   │   │   ├── vpc/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── firewall/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── load-balancer/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── cdn/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── storage/
-│   │   │   ├── gcs/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── disk/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── database/
-│   │   │   ├── cloud-sql/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── firestore/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── memorystore/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── monitoring/
-│   │   │   ├── monitoring/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── logging/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   ├── security/
-│   │   │   ├── iam/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   ├── secret-manager/
-│   │   │   │   ├── main.tf
-│   │   │   │   ├── variables.tf
-│   │   │   │   ├── outputs.tf
-│   │   │   │   └── versions.tf
-│   │   │   └── kms/
-│   │   │       ├── main.tf
-│   │   │       ├── variables.tf
-│   │   │       ├── outputs.tf
-│   │   │       └── versions.tf
-│   │   └── management/
-│   │       ├── project/
-│   │       │   ├── main.tf
-│   │       │   ├── variables.tf
-│   │       │   ├── outputs.tf
-│   │       │   └── versions.tf
-│   │       └── org-policy/
-│   │           ├── main.tf
-│   │           ├── variables.tf
-│   │           ├── outputs.tf
-│   │           └── versions.tf
-│   │
-│   └── shared/
-│       ├── naming/
-│       │   ├── main.tf
-│       │   ├── variables.tf
-│       │   ├── outputs.tf
-│       │   └── versions.tf
-│       ├── tagging/
-│       │   ├── main.tf
-│       │   ├── variables.tf
-│       │   ├── outputs.tf
-│       │   └── versions.tf
-│       └── data-sources/
-│           ├── main.tf
-│           ├── variables.tf
-│           ├── outputs.tf
-│           └── versions.tf
-│
+  terraform/
+  │
+  ├── global/
+  │   ├── variables/
+  │   │   ├── dev/
+  │   │   │   ├── main.tfvars
+  │   │   │   └── state.tfvars
+  │   │   ├── staging/
+  │   │   │   ├── main.tfvars
+  │   │   │   └── state.tfvars
+  │   │   └── prod/
+  │   │       ├── main.tfvars
+  │   │       └── state.tfvars
+  │   └── common/
+  │       ├── common.tfvars
+  │       └── shared-variables.tf
+  │
+  ├── environments/
+  │   ├── dev/
+  │   │   ├── main.tf
+  │   │   ├── variables.tf
+  │   │   ├── outputs.tf
+  │   │   ├── backend.tf
+  │   │   └── providers.tf
+  │   ├── staging/
+  │   │   ├── main.tf
+  │   │   ├── variables.tf
+  │   │   ├── outputs.tf
+  │   │   ├── backend.tf
+  │   │   └── providers.tf
+  │   └── prod/
+  │       ├── main.tf
+  │       ├── variables.tf
+  │       ├── outputs.tf
+  │       ├── backend.tf
+  │       └── providers.tf
+  │
+  ├── modules/
+  │   ├── aws/
+  │   │   ├── compute/
+  │   │   │   ├── ec2/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── ecs/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── eks/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── lambda/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── networking/
+  │   │   │   ├── vpc/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── security-groups/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── load-balancer/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── cloudfront/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── storage/
+  │   │   │   ├── s3/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── efs/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── database/
+  │   │   │   ├── rds/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── dynamodb/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── elasticache/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── monitoring/
+  │   │   │   ├── cloudwatch/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── sns/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── security/
+  │   │   │   ├── iam/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── secrets-manager/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── kms/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   └── management/
+  │   │       ├── cloudtrail/
+  │   │       │   ├── main.tf
+  │   │       │   ├── variables.tf
+  │   │       │   ├── outputs.tf
+  │   │       │   └── versions.tf
+  │   │       └── config/
+  │   │           ├── main.tf
+  │   │           ├── variables.tf
+  │   │           ├── outputs.tf
+  │   │           └── versions.tf
+  │   │
+  │   ├── azure/
+  │   │   ├── compute/
+  │   │   │   ├── vm/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── vmss/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── aks/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── container-instances/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── functions/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── networking/
+  │   │   │   ├── vnet/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── nsg/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── load-balancer/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── application-gateway/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── cdn/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── storage/
+  │   │   │   ├── storage-account/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── disk/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── database/
+  │   │   │   ├── sql/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── cosmos-db/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── redis/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── monitoring/
+  │   │   │   ├── monitor/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── log-analytics/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── security/
+  │   │   │   ├── key-vault/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── identity/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── security-center/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   └── management/
+  │   │       ├── resource-group/
+  │   │       │   ├── main.tf
+  │   │       │   ├── variables.tf
+  │   │       │   ├── outputs.tf
+  │   │       │   └── versions.tf
+  │   │       └── policy/
+  │   │           ├── main.tf
+  │   │           ├── variables.tf
+  │   │           ├── outputs.tf
+  │   │           └── versions.tf
+  │   │
+  │   ├── gcp/
+  │   │   ├── compute/
+  │   │   │   ├── vm/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── gke/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── cloud-run/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── cloud-functions/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── networking/
+  │   │   │   ├── vpc/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── firewall/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── load-balancer/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── cdn/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── storage/
+  │   │   │   ├── gcs/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── disk/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── database/
+  │   │   │   ├── cloud-sql/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── firestore/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── memorystore/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── monitoring/
+  │   │   │   ├── monitoring/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── logging/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   ├── security/
+  │   │   │   ├── iam/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   ├── secret-manager/
+  │   │   │   │   ├── main.tf
+  │   │   │   │   ├── variables.tf
+  │   │   │   │   ├── outputs.tf
+  │   │   │   │   └── versions.tf
+  │   │   │   └── kms/
+  │   │   │       ├── main.tf
+  │   │   │       ├── variables.tf
+  │   │   │       ├── outputs.tf
+  │   │   │       └── versions.tf
+  │   │   └── management/
+  │   │       ├── project/
+  │   │       │   ├── main.tf
+  │   │       │   ├── variables.tf
+  │   │       │   ├── outputs.tf
+  │   │       │   └── versions.tf
+  │   │       └── org-policy/
+  │   │           ├── main.tf
+  │   │           ├── variables.tf
+  │   │           ├── outputs.tf
+  │   │           └── versions.tf
+  │   │
+  │   └── shared/
+  │       ├── naming/
+  │       │   ├── main.tf
+  │       │   ├── variables.tf
+  │       │   ├── outputs.tf
+  │       │   └── versions.tf
+  │       ├── tagging/
+  │       │   ├── main.tf
+  │       │   ├── variables.tf
+  │       │   ├── outputs.tf
+  │       │   └── versions.tf
+  │       └── data-sources/
+  │           ├── main.tf
+  │           ├── variables.tf
+  │           ├── outputs.tf
+  │           └── versions.tf
+  │
 ├── scripts/
 │   ├── deploy.sh
 │   ├── init.sh
