@@ -12,13 +12,13 @@ The goal is to demonstrate a **multi-cloud strategy** where Kubernetes serves as
 
 ## 🎯 Features
 
-✅ **Multi-Cloud Infrastructure** – Provision AWS EKS and GCP GKE clusters with Terraform.
-✅ **Infrastructure Automation** – Python scripts (containerized) for AWS (boto3) and GCP (google-cloud SDK) operations, plus Kubernetes API automation.
-✅ **Monitoring** – Prometheus + Grafana dashboards across clusters.
-✅ **CI/CD** – Jenkins deployed inside Kubernetes for automated pipelines.
-✅ **Code Quality & Security** – SonarQube integration for static code analysis, Trivy for container vulnerability scanning.
-✅ **Secrets Management** – Kubernetes secrets (can be extended with Vault).
-✅ **Scalable Architecture** – Easily extendable to other clouds.
+- ✅ **Multi-Cloud Infrastructure** – Provision AWS EKS and GCP GKE clusters with Terraform.
+- ✅ **Infrastructure Automation** – Python scripts (containerized) for AWS (boto3) and GCP (google-cloud SDK) operations, plus Kubernetes API automation.
+- ✅ **Monitoring** – Prometheus + Grafana dashboards across clusters.
+- ✅ **CI/CD** – Jenkins deployed inside Kubernetes for automated pipelines.
+- ✅ **Code Quality & Security** – SonarQube integration for static code analysis, Trivy for container vulnerability scanning.
+- ✅ **Secrets Management** – Kubernetes secrets (can be extended with Vault).
+- ✅ **Scalable Architecture** – Easily extendable to other clouds.
 
 ---
 
